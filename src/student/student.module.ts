@@ -1,6 +1,6 @@
-import { StudentResolver } from './student.resolver';
+import { StudentResolver } from './resolvers/student.resolver';
 import { Module } from '@nestjs/common';
-import { StudentService } from './student.service';
+import { StudentService } from './services/student.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Student } from './student.entity';
 

@@ -6,12 +6,12 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { LessonType } from './lesson.type';
-import { LessonService } from './lesson.service';
-import { CreateLessonInput } from './lesson.input';
-import { AssignStudentsToLessonInput } from './assign-students-to-lesson.input';
-import { Lesson } from './lesson.entity';
-import { StudentService } from 'src/student/student.service';
+import { LessonType } from '../types/lesson.type';
+import { LessonService } from '../services/lesson.service';
+import { CreateLessonInput } from '../inputs/create-lesson.input';
+import { AssignStudentsToLessonInput } from '../inputs/assign-students-to-lesson.input';
+import { Lesson } from '../lesson.entity';
+import { StudentService } from 'src/student/services/student.service';
 
 @Resolver(() => LessonType)
 export class LessonResolver {
