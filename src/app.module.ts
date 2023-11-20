@@ -17,7 +17,7 @@ import { Student } from './student/student.entity';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true, // To generate schema file
+      autoSchemaFile: 'src/graphql/schema.gql', // To generate schema file
     }),
     LessonModule,
     StudentModule,
