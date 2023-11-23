@@ -9,20 +9,20 @@ import { CreateLessonInput } from '../inputs/create-lesson.input';
 export class LessonService {
   constructor(
     @InjectRepository(Lesson)
-    private readonly lessonRepository: MongoRepository<Lesson>,
+    private readonly _lessonRepository: MongoRepository<Lesson>,
   ) {}
 
   async getLessons(): Promise<Lesson[]> {
-    return this.lessonRepository.find();
+    return this._lessonRepository.find();
   }
 
   async getLesson(id: string): Promise<Lesson> {
-    return this.lessonRepository.findOne({ where: { id } });
+    return this._lessonRepository.findOne({ where: { id } });
   }
 
   async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
     const { name, startDate, endDate, students } = createLessonInput;
-    const lesson = this.lessonRepository.create({
+    const lesson = this._lessonRepository.create({
       id: uuid(),
       name,
       startDate,
@@ -30,19 +30,31 @@ export class LessonService {
       students,
     });
 
-    return this.lessonRepository.save(lesson);
+    return this._lessonRepository.save(lesson);
   }
 
   async assignStudentsToLesson(
     lessonId: string,
     studentIds: string[],
   ): Promise<Lesson> {
-    const lesson = await this.lessonRepository.findOne({
+    const lesson = await this._lessonRepository.findOne({
       where: {
         id: lessonId,
       },
     });
+
     lesson.students = [...lesson.students, ...studentIds];
-    return this.lessonRepository.save(lesson);
+
+    return this._lessonRepository.save(lesson);
+  }
+
+  async getManyLessonsById(lessonIds: string[]): Promise<Lesson[]> {
+    return this._lessonRepository.find({
+      where: {
+        id: {
+          $in: lessonIds ?? [],
+        },
+      },
+    });
   }
 }
