@@ -12,12 +12,13 @@ import { CreateLessonInput } from '../inputs/create-lesson.input';
 import { AssignStudentsToLessonInput } from '../inputs/assign-students-to-lesson.input';
 import { Lesson } from '../lesson.entity';
 import { StudentService } from 'src/student/services/student.service';
+import { Student } from 'src/student/student.entity';
 
 @Resolver(() => LessonType)
 export class LessonResolver {
   constructor(
-    private lessonService: LessonService,
-    private studentService: StudentService,
+    public lessonService: LessonService,
+    public studentService: StudentService,
   ) {}
 
   @Query(() => [LessonType])
@@ -43,11 +44,12 @@ export class LessonResolver {
     assignStudentsToLessonInput: AssignStudentsToLessonInput,
   ) {
     const { lessonId, studentIds } = assignStudentsToLessonInput;
+
     return this.lessonService.assignStudentsToLesson(lessonId, studentIds);
   }
 
   @ResolveField()
-  async students(@Parent() lesson: Lesson) {
+  async students(@Parent() lesson: Lesson): Promise<Student[]> {
     return this.studentService.getManyStudentsById(lesson.students);
   }
 }
