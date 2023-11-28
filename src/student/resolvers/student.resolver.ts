@@ -1,4 +1,4 @@
-import { LessonService } from './../../lesson/services/lesson.service';
+import { LessonService } from '../../lesson/services/lesson.service';
 import {
   Args,
   Mutation,
