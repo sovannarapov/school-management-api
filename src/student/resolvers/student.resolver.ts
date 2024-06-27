@@ -17,8 +17,8 @@ import { AssignLessonsToStudentInput } from '../inputs/assign-lessons-to-student
 @Resolver(() => StudentType)
 export class StudentResolver {
   constructor(
-    public studentService: StudentService,
-    public lessonService: LessonService,
+    private readonly studentService: StudentService,
+    private readonly lessonService: LessonService,
   ) {}
 
   @Query(() => [StudentType])

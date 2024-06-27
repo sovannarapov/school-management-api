@@ -17,8 +17,8 @@ import { Student } from 'src/student/student.entity';
 @Resolver(() => LessonType)
 export class LessonResolver {
   constructor(
-    public lessonService: LessonService,
-    public studentService: StudentService,
+    private readonly lessonService: LessonService,
+    private readonly studentService: StudentService,
   ) {}
 
   @Query(() => [LessonType])
